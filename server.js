@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // This line allows files to be served via the public folder/directory
 app.use(express.static('public'))
 app.set('view engine', 'ejs'); // set up ejs for templating
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 // required for passport
 app.use(session({
     secret: 'rcbootcamp2019a', // session secret

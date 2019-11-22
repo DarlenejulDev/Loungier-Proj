@@ -1,9 +1,9 @@
 # Loungier- Project
 
 
-![](public/img/home.png)
+![](/public/img/home.png)
 
-![](public/img/profile.png)
+![](/public/img/profile.png)
 
 
 Coming Soon...

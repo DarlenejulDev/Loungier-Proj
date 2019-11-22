@@ -1,10 +1,10 @@
-let userFirstName=document.querySelector('.userFirstName').value
-let userLastName=document.querySelector('.userLastName').value
-let userEmail=document.querySelector('.userEmail').value
-let phoneNumber=document.querySelector('.phoneNumber').value
+let userFirstName=document.getElementsByClassName('userFirstName')
+let userLastName=document.getElementsByClassName('userLastName')
+let userEmail=document.getElementsByClassName('userEmail')
+let phoneNumber=document.getElementsByClassName('phoneNumber')
 let btn =document.querySelector('button')
-let del = document.getElementsByClassName('delete')
-let update= document.getElementsByClassName('update')
+let del = document.getElementById('delete')
+let update= document.getElementById('update')
 
 // btn.addEventListener('click',=>{
 //
@@ -12,50 +12,41 @@ let update= document.getElementsByClassName('update')
 //
 //   appendChild('results')
 // })
+      console.log("adding update handler",update)
+     update.addEventListener('click', function(){
+       console.log('running');
+        const userFirstName = this.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText
+        const userLastName= this.parentNode.childNodes[3].childNodes[3].childNodes[1].innerText
 
-Array.from(update).forEach(function(element) {
-      element.addEventListener('click', function(){
-        const userFirstName = this.parentNode.parentNode.childNodes[1].innerText
-        const userLastName = this.parentNode.parentNode.childNodes[3].innerText
-        const userEmail = this.parentNode.parentNode.childNodes[3].innerText
-        const phoneNumber = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
+        // const phoneNumber = this.parentNode.parentNode.childNodes[5].innerText
         fetch('profileInfo', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
             'userFirstName': userFirstName,
             'userLastName': userLastName,
-            'userEmail':userEmail,
-            'phoneNumber':phoneNumber,
+            'phoneNumber':1,
           })
         })
         .then(response => {
           if (response.ok) return response.json()
         })
         .then(data => {
-          console.log(data)
+          console.log('response from update',data)
           window.location.reload(true)
         })
       });
-});
 
-Array.from(del).forEach(function(element) {
-      element.addEventListener('click', function(){
-        const name = this.parentNode.parentNode.childNodes[1].innerText
-        const msg = this.parentNode.parentNode.childNodes[3].innerText
+      del.addEventListener('click', function(){
+
+
         fetch('profileInfo', {
           method: 'delete',
           headers: {
             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            'userFirstName': userFirstName,
-            'userLastName': userLastName,
-            'userEmail':userEmail,
-            'phoneNumber':phoneNumber,
-          })
+          }
+
         }).then(function (response) {
-          window.location.reload()
+          window.location.replace('/')
         })
       });
-});

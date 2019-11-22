@@ -8,7 +8,7 @@ module.exports = function(app, passport, db) {
     });
 
     // PROFILE SECTION =========================
-    // This route brings the user to their profile page once they have successfully logged in.
+    // This route brings the user to their profile page once they have successfully logged in making sure to check the user's email.
     app.get('/profile', isLoggedIn, function(req, res) {
       // console.log();
       console.log('profile email' , req.user.local.email)
@@ -30,22 +30,8 @@ module.exports = function(app, passport, db) {
     });
 // ===================================================
 
-// This request grabs the profile.ejs and displays the page along with an object of the results
-// app.get('/profile', (req, res) => {
-//   db.collection('loungierList').find().toArray((err, result) => {
-//     if (err) return console.log(err)
-//     res.render('profile.ejs', {loungierListResults: result})
-//   })
-// })
 
 // This takes the user's information from the form and saves it into the database.Then it goes to the profile route which redisplays the page with the new information.
-// app.post('/profileInfo', (req, res) => {
-//   db.collection('loungierList').save({userFirstName: req.body.userFirstName, userLastName: req.body.userLastName, userEmail:req.body.userEmail, phoneNumber:parseFloat(req.body.phoneNumber)}, (err, result) => {
-//     if (err) return console.log(err)
-//     console.log('saved to database')
-//     res.redirect('/profile')
-//   })
-// })
 
 app.post('/profile', (req, res) => {
   db.collection('loungierList').save({userFirstName: req.body.userFirstName, userLastName: req.body.userLastName, userEmail:req.body.userEmail, phoneNumber:parseFloat(req.body.phoneNumber)}, (err, result) => {
@@ -55,7 +41,7 @@ app.post('/profile', (req, res) => {
   })
 })
 
-// This updates the user info by finding their first and last names in the database, then updating their email and phone number.
+// This updates the user info by finding their email in the database, then updating their first name, last name, and phone number.
 app.put('/profileInfo', (req, res) => { console.log('hello')
   db.collection('loungierList')
   .findOneAndUpdate({userEmail:req.user.local.email}, {
@@ -74,7 +60,7 @@ app.put('/profileInfo', (req, res) => { console.log('hello')
   })
 })
 
-// this finds all of the properties,once it is a match, it then deletes all of the user information
+// this finds the user's email,once it is a match, it then deletes all of the user information in the collections.
 app.delete('/profileInfo', (req, res) => { console.log(req.body)
   db.collection('loungierList').findOneAndDelete({userEmail: req.user.local.email}, (err, result) => {
     if (err) return res.send(500, err)

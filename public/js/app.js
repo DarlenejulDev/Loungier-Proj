@@ -17,6 +17,7 @@ let update= document.getElementById('update')
        console.log('running');
         const userFirstName = this.parentNode.childNodes[1].childNodes[3].childNodes[1].innerText
         const userLastName= this.parentNode.childNodes[3].childNodes[3].childNodes[1].innerText
+        const phoneNumber=this.parentNode.childNodes[7].childNodes[3].innerText
 
         // const phoneNumber = this.parentNode.parentNode.childNodes[5].innerText
         fetch('profileInfo', {
@@ -25,7 +26,7 @@ let update= document.getElementById('update')
           body: JSON.stringify({
             'userFirstName': userFirstName,
             'userLastName': userLastName,
-            'phoneNumber':1,
+            'phoneNumber':phoneNumber,
           })
         })
         .then(response => {

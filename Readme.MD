@@ -6,6 +6,7 @@ Have you ever just wanted to rest in the middle of your day in a nice comfy day?
 
 ![](/public/img/profile.png)
 
+*Please insert same email into profile as login*
 
 Coming Soon...
 
@@ -43,6 +44,5 @@ body-parser
 1. run `node server.js` or `npm run start`
 2. Navigate to `localhost:5000`
 
-*Please insert same email into profile as login*
 
 
